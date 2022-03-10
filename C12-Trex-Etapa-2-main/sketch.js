@@ -2,6 +2,7 @@ var trex, trex_running, trex_collided;
 var ground, invisibleGround, groundImage;
 var nuvem;
 var nuvemImage;
+var obstacle1, obstacle2, obstacle3, obstacle4, obstacle5, obstacle6;
 
 function preload(){
   trex_running = loadAnimation("trex1.png","trex2.png","trex3.png");
@@ -9,7 +10,13 @@ function preload(){
 
   groundImage = loadImage("ground2.png");
   nuvemImage = loadImage("cloud.png");
- 
+
+  obstacle1 = loadImage("obstacle1.png");
+  obstacle2 = loadImage("obstacle2.png");
+  obstacle3 = loadImage("obstacle3.png");
+  obstacle4 = loadImage("obstacle4.png");
+  obstacle5 = loadImage("obstacle5.png");
+  obstacle6 = loadImage("obstacle6.png");
   
 }
 
@@ -54,13 +61,16 @@ function draw() {
   //impedir que o trex caia
   trex.collide(invisibleGround);
 
-  creatClouds();
+  createClouds();
+
+  createObstacles();
 
   drawSprites();
 }
 
-function creatClouds() {
+function createClouds() {
   // a cada 60 quadros 
+  // console.log(frameCount);
   if(frameCount % 60 == 0) {
     nuvem = createSprite(600,100,40,10); 
     nuvem.addImage("nuvem", nuvemImage);
@@ -71,6 +81,40 @@ function creatClouds() {
     trex.depth = trex.depth + 1;
   }
 
+
+}
+
+function createObstacles() {
+  if (frameCount % 60 == 0) {
+    var obstacle = createSprite(400, 165, 10, 40);
+    obstacle.velocityX = -6;
+
+    var rand = Math.round(random(1, 6));
+    switch (rand) {
+      case 1:
+        obstacle.addImage(obstacle1);        
+        break;
+      case 2:
+        obstacle.addImage(obstacle2);        
+        break;
+      case 3:
+        obstacle.addImage(obstacle3);        
+        break;
+      case 4:
+        obstacle.addImage(obstacle4);        
+        break;
+      case 5:
+        obstacle.addImage(obstacle5);        
+        break;
+      case 6:
+        obstacle.addImage(obstacle6);        
+        break;
+    }
+
+    
+
+
+  }
 
 }
 
