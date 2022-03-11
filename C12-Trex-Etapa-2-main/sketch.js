@@ -3,7 +3,7 @@ var ground, invisibleGround, groundImage;
 var nuvem;
 var nuvemImage;
 var obstacle1, obstacle2, obstacle3, obstacle4, obstacle5, obstacle6;
-
+var score = 0;
 function preload(){
   trex_running = loadAnimation("trex1.png","trex2.png","trex3.png");
   trex_collided = loadImage("trex_collided.png");
@@ -42,12 +42,12 @@ function setup() {
 }
 
 function draw() {
-  //definir cor do plano de fundo
+
   background("white");
   
-  
-  
-  // pulando o trex ao pressionar a tecla de espaço
+  text("Pontuação: " + score, 500, 50);  
+  score = score + Math.round(frameCount / 60);
+
   if(keyDown("space") && trex.y >= 160) {
     trex.velocityY = -12;
   }
@@ -58,7 +58,7 @@ function draw() {
     ground.x = ground.width/2;
   }
   
-  //impedir que o trex caia
+ 
   trex.collide(invisibleGround);
 
   createClouds();
@@ -111,10 +111,9 @@ function createObstacles() {
         break;
     }
 
-    
-
+    obstacle.scale = 0.5;
+    obstacle.lifetime = 300; 
 
   }
 
 }
-
