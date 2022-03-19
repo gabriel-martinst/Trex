@@ -29,12 +29,13 @@ function preload(){
   obstacle5 = loadImage("obstacle5.png");
   obstacle6 = loadImage("obstacle6.png");
   
-   restartImg = loadImage("restart.png")
+  restartImg = loadImage("restart.png")
   gameOverImg = loadImage("gameOver.png")
   
   jumpSound = loadSound("jump.mp3")
   dieSound = loadSound("die.mp3")
   checkPointSound = loadSound("checkPoint.mp3")
+
 }
 
 function setup() {
@@ -49,7 +50,7 @@ function setup() {
   ground.addImage("ground",groundImage);
   ground.x = ground.width /2;
   
-   gameOver = createSprite(300,100);
+  gameOver = createSprite(300,100);
   gameOver.addImage(gameOverImg);
   
   restart = createSprite(300,140);
@@ -65,23 +66,19 @@ function setup() {
   obstaclesGroup = createGroup();
   cloudsGroup = createGroup();
   
-  console.log("Hello" + 5);
-  
   trex.setCollider("circle",0,0,40);
-  trex.debug = true
+  // trex.debug = true
   
   score = 0;
+
   
 }
 
 function draw() {
   
-  background(180);
+  background("white");
   //exibir pontuação
   text("Score: "+ score, 500,50);
-  
-  console.log("this is ",gameState)
-  
   
   if(gameState === PLAY){
     gameOver.visible = false
@@ -91,6 +88,7 @@ function draw() {
     //pontuação
     score = score + Math.round(frameCount/60);
     
+    // Recriar o chão
     if (ground.x < 0){
       ground.x = ground.width/2;
     }
@@ -118,7 +116,7 @@ function draw() {
     }
   }
    else if (gameState === END) {
-     console.log("hey")
+    //  console.log("hey")
       gameOver.visible = true;
       restart.visible = true;
      
@@ -140,7 +138,9 @@ function draw() {
   //impedir que o trex caia
   trex.collide(invisibleGround);
   
-  
+  if (mousePressedOver(restart)) {
+    // console.log("reiniciar o jogo");
+  }
   
   drawSprites();
 }
@@ -196,5 +196,9 @@ function spawnClouds() {
     //adicionando nuvem ao grupo
    cloudsGroup.add(cloud);
     }
+}
+
+function resetGame() {
+
 }
 
